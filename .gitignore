@@ -1,0 +1,7 @@
+.vscode
+.west
+zmk
+modules
+.venv
+build
+firmware

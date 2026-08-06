@@ -1,0 +1,46 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#define MAIN 0
+#define NAV 1
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+        
+        default_layer {
+            display-name = "main";
+            bindings = <
+    &kp TAB     &kp Q       &kp W       &kp E       &kp R       &kp T               &kp Y       &kp U       &kp I       &kp O       &kp P       &kp LBKT
+    &kp ESC     &kp A       &kp S       &kp D       &kp F       &kp G               &kp H       &kp J       &kp K       &kp L       &kp SEMI    &kp SQT
+    &kp LSHFT   &kp Z       &kp X       &kp C       &kp V       &kp B               &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp RBKT
+                                        &kp LGUI    &mo NAV     &kp SPACE           &kp RET     &kp BSPC    &kp LCTRL
+            >;
+        };
+
+
+         nav_layer {
+            display-name = "nav";
+            bindings = <
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+    &trans      &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &trans              &kp LEFT      &kp DOWN    &kp UP      &kp RIGHT   &trans      &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+                                        &trans      &trans      &trans              &trans      &trans      &trans
+            >;
+        };
+        
+    };
+};
+
+
+
+
+
+/*
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+                                        &trans      &trans      &trans              &trans      &trans      &trans
+
+*/

@@ -1,5 +1,7 @@
 .vscode
 .west
+zephyr
+optional
 zmk
 modules
 .venv

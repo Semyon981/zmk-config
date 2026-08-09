@@ -26,3 +26,5 @@ clean:
 
 
 # export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+
+# zmk/app/include/dt-bindings/zmk/keys.h

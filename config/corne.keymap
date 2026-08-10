@@ -26,8 +26,8 @@
             display-name = "nav";
             bindings = <
     &trans      &kp LG(Q)   &kp LG(W)   &kp LG(E)  &kp LG(R)  &kp LG(D)             &kp HOME        &kp PG_DN   &kp PG_UP   &kp END           &none      &kp LG(LS(S))
-    &trans      &kp LALT    &kp LGUI    &kp LCTRL  &kp LSHFT  &kp LG(M)             &kp LG(H)       &kp LG(J)   &kp LG(K)   &kp LG(L)         &none      &kp LG(LS(X))
-    &trans      &none       &none       &none      &none      &none                 &kp LEFT        &kp DOWN    &kp UP      &kp RIGHT         &none      &trans
+    &trans      &kp LALT    &kp LGUI    &kp LCTRL  &kp LSHFT  &kp LG(M)             &kp LEFT        &kp DOWN    &kp UP      &kp RIGHT         &none      &kp LG(LS(X))
+    &trans      &none       &none       &none      &none      &none                 &kp LG(H)       &kp LG(J)   &kp LG(K)   &kp LG(L)         &none      &trans
                                         &none      &none      &none                 &kp LA(SPACE)   &kp LG(SPACE)         &kp LG(RET)
             >;
         };
@@ -35,10 +35,10 @@
         sym_layer {
             display-name = "sym";
             bindings = <
-    &trans      &none       &none       &none       &none       &none               &none       &kp N7      &kp N8      &kp N9       &none      &none
-    &trans      &kp LALT    &kp LGUI    &kp LCTRL  &kp LSHFT    &none               &kp N0      &kp N4      &kp N5      &kp N6       &none      &none
-    &trans      &none       &none       &none       &none       &none               &none       &kp N1      &kp N2      &kp N3       &none      &trans
-                                        &none       &none       &none               &none       &trans      &none
+    &trans      &kp TILDE   &kp GRAVE   &kp PIPE    &kp LBRC    &kp RBRC            &kp CARET   &kp N7      &kp N8      &kp N9       &kp HASH   &kp AT
+    &trans      &kp UNDER   &kp MINUS   &kp EQUAL   &kp LPAR    &kp RPAR            &kp N0      &kp N4      &kp N5      &kp N6       &kp EXCL   &kp DLLR
+    &trans      &kp BSLH    &kp PLUS    &kp ASTRK   &kp LBKT    &kp RBKT            &kp AMPS    &kp N1      &kp N2      &kp N3       &kp PRCNT  &trans
+                                        &trans      &trans      &trans              &trans      &trans      &trans
             >;
         };
         
@@ -122,6 +122,28 @@
             layers = <MAIN>;
         };
         
+        combo_dqt {
+            timeout-ms = <35>;
+            key-positions = <20 21>; // kl
+            bindings = <&kp DQT>; // "
+            layers = <MAIN>;
+        };
+
+        
+        combo_sqt {
+            timeout-ms = <35>;
+            key-positions = <19 20>; // jk
+            bindings = <&kp SQT>; // '
+            layers = <MAIN>;
+        };
+        
+        combo_under {
+            timeout-ms = <35>;
+            key-positions = <7 8>;    // ui
+            bindings = <&kp UNDER>; // _ 
+            layers = <MAIN>;
+        };
+
     };
 };
 

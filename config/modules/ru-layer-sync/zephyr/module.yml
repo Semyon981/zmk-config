@@ -1,0 +1,4 @@
+name: ru-layer-sync
+build:
+  cmake: .
+  kconfig: Kconfig

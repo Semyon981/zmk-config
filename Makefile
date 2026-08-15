@@ -25,8 +25,12 @@ DOCKER_RUN = docker run --rm \
 	-w /workspace
 
 # $(1) — имя сборки, $(2) — шилд, $(3) — имя итогового uf2.
+# Локальные модули лежат в config/, потому что только он монтируется в контейнер.
+MODULES := /workspace/config/modules/ru-layer-sync
+
 west-build = $(DOCKER_RUN) $(IMAGE) bash -c "west build -p auto -s zmk/app \
 	-d /build/$(1) -b '$(BOARD)' -- -DSHIELD=$(2) -DZMK_CONFIG=/workspace/config \
+	-DZMK_EXTRA_MODULES='$(MODULES)' \
 	&& cp /build/$(1)/zephyr/zmk.uf2 /out/$(3).uf2"
 
 .PHONY: all image dirs shell clean flash $(SIDES) reset

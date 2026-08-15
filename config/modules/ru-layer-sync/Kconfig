@@ -1,0 +1,30 @@
+# Синхронизация слоя раскладки с хостом через HID-индикатор.
+
+config ZMK_RU_LAYER_SYNC
+    bool "Sync a keymap layer with the host keyboard layout via a HID indicator"
+    default y
+    depends on ZMK_HID_INDICATORS
+    # На периферийной половине keymap не собирается, и zmk_keymap_* не линкуется.
+    depends on !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
+    help
+      Хост сообщает состояние индикаторов (Num/Caps/Scroll Lock) обратно
+      клавиатуре. Если в раскладке ОС индикатор привязан к группе (в xkb это
+      опция grp_led:scroll), клавиатура узнаёт активный язык и включает
+      соответствующий слой сама, без синхронизации вручную.
+
+if ZMK_RU_LAYER_SYNC
+
+config ZMK_RU_LAYER_SYNC_LAYER
+    int "Layer index to follow the indicator"
+    default 1
+    help
+      Индекс слоя в keymap, а не имя. Слой RU объявлен вторым, отсюда 1.
+
+config ZMK_RU_LAYER_SYNC_INDICATOR
+    hex "HID indicator bitmask to watch"
+    default 0x04
+    help
+      Битовая маска из dt-bindings/zmk/hid_indicators.h:
+      0x01 Num Lock, 0x02 Caps Lock, 0x04 Scroll Lock, 0x08 Compose, 0x10 Kana.
+
+endif # ZMK_RU_LAYER_SYNC

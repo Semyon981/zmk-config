@@ -64,7 +64,7 @@
         lts: layer_tap_sticky {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
+            flavor = "balanced";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&skq>;
         };
@@ -88,59 +88,13 @@
             bindings = <&kp LG(SPACE)>;
         };
 
-        lbkt_ru: lbkt_ru {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&ru_en LBKT>, <&ru_en LBRC>;
-            mods = <SHIFT_MODS>;
-        };
-
-        rbkt_ru: rbkt_ru {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&ru_en RBKT>, <&ru_en RBRC>;
-            mods = <SHIFT_MODS>;
-        };
-
-        sqt_ru: sqt_ru {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&ru_en SQT>, <&kp LS(N2)>;
-            mods = <SHIFT_MODS>;
-        };
-
-        bslh_ru: bslh_ru {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp BSLH>, <&ru_en PIPE>;
-            mods = <SHIFT_MODS>;
-        };
-
+        /* Единственный оставшийся mod-morph. Держит / и ? на позиции 34
+         * слоя NUM: Shift там приходит из мышечной памяти обычной
+         * клавиатуры. На слоях Shift для символов не используется вообще. */
         slash_ru: slash_ru {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp LS(BSLH)>, <&kp LS(N7)>;
-            mods = <SHIFT_MODS>;
-        };
-
-        comma_ru: comma_ru {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp LS(FSLH)>, <&ru_en LT>;
-            mods = <SHIFT_MODS>;
-        };
-
-        dot_ru: dot_ru {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp FSLH>, <&ru_en GT>;
-            mods = <SHIFT_MODS>;
-        };
-
-        semi_ru: semi_ru {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp LS(N4)>, <&kp LS(N6)>;
             mods = <SHIFT_MODS>;
         };
 
@@ -165,6 +119,20 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+
+        /* ъ: своей клавиши не осталось, 35 занята переехавшей ю. Пара 10+11
+         * (з и х) — биграммы «зх» в русском нет. Только на RU: на базе
+         * там P и [. */
+        ru_hardsign {
+            key-positions = <10 11>;
+            bindings = <&kp RBKT>;
+            layers = <RU>;
+            timeout-ms = <50>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -173,7 +141,7 @@
             bindings = <
     &kp TAB     &kp Q           &kp W           &kp E           &kp R           &kp T               &kp Y       &kp U           &kp I           &kp O           &kp P               &kp LBKT
     &kp ESC     &hml LGUI A     &hml LALT S     &hml LCTRL D    &hml LSHFT F    &kp G               &kp H       &hmr LSHFT J    &hmr LCTRL K    &hmr LALT L     &hmr LGUI SEMI      &kp SQT
-    &kp LCTRL   &kp Z           &kp X           &kp C           &kp V           &kp B               &kp N       &kp M           &kp COMMA       &kp DOT         &kp FSLH            &kp RBKT
+    &kp LCTRL   &kp Z           &kp X           &kp C           &kp V           &kp B               &kp N       &kp M           &kp COMMA       &kp DOT         &kp FSLH            &kp RSHFT
                                                 &lts NUM LSHFT  &mo NAV         &kp SPACE           &kp RET     &kp BSPC        &lts SYM RSHFT
             >;
         };
@@ -181,10 +149,10 @@
         ru_layer {
             display-name = "ru";
             bindings = <
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &slash_ru   &trans
-                                        &trans      &trans      &trans              &trans      &trans      &trans
+    &trans       &trans       &trans       &trans       &trans       &trans               &trans       &trans       &trans       &trans       &trans       &trans
+    &trans       &trans       &trans       &trans       &trans       &trans               &trans       &trans       &trans       &trans       &trans       &trans
+    &trans       &trans       &trans       &trans       &trans       &trans               &trans       &trans       &kp LS(FSLH) &kp FSLH     &kp COMMA    &kp DOT
+                                           &trans       &trans       &trans               &trans       &trans       &trans
             >;
         };
 
@@ -194,7 +162,7 @@
     &trans      &caps_word      &kp LC(LS(TAB)) &kp LC(TAB)     &kp LG(TAB)     &none               &kp HOME        &kp PG_DN   &kp PG_UP   &kp END         &kp INS         &kp PSCRN
     &trans      &kp LGUI        &kp LALT        &kp LCTRL       &kp LSHFT       &kp LC(A)           &kp LEFT        &kp DOWN    &kp UP      &kp RIGHT       &kp DEL         &none
     &trans      &kp LC(Z)       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(LS(Z))       &kp C_PREV      &kp C_PP    &kp C_NEXT  &kp C_VOL_DN    &kp C_VOL_UP    &kp C_MUTE
-                                                &trans          &trans          &trans              &lang           &trans      &trans
+                                                &trans          &trans          &trans              &kp LG(O)       &lang       &trans
             >;
         };
 
@@ -202,7 +170,7 @@
             display-name = "num";
             bindings = <
     &none       &none       &none       &none       &none       &none               &kp GRAVE   &kp N7      &kp N8      &kp N9      &kp LBKT    &kp RBKT
-    &trans      &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &none               &kp COMMA   &kp N4      &kp N5      &kp N6      &kp DOT     &kp SQT
+    &trans      &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &none               &kp QMARK   &kp N4      &kp N5      &kp N6      &kp EXCL    &kp SQT
     &trans      &none       &none       &none       &none       &none               &kp N0      &kp N1      &kp N2      &kp N3      &kp FSLH    &kp BSLH
                                         &trans      &trans      &trans              &trans      &trans      &trans
             >;
@@ -211,9 +179,9 @@
         sym_layer {
             display-name = "sym";
             bindings = <
-    &kp PRCNT   &kp CARET   &kp AMPS    &kp LT      &kp GT      &kp EXCL            &trans      &trans      &trans      &trans      &trans      &trans
-    &kp QMARK   &kp MINUS   &kp EQUAL   &kp LPAR    &kp RPAR    &kp UNDER           &trans      &kp LSHFT   &kp LCTRL   &kp LALT    &kp LGUI    &trans
-    &kp SEMI    &kp TILDE   &kp DLLR    &kp HASH    &kp ASTRK   &kp AT              &trans      &trans      &trans      &trans      &trans      &trans
+    &kp EXCL    &kp PIPE    &kp SEMI    &kp COLON   &kp UNDER   &kp GT              &kp DLLR    &kp HASH    &kp PRCNT   &kp PLUS    &kp AT      &kp CARET
+    &kp QMARK   &kp MINUS   &kp EQUAL   &kp LPAR    &kp RPAR    &kp DQT             &none       &kp LSHFT   &kp LCTRL   &kp LALT    &kp LGUI    &none
+    &kp ASTRK   &kp FSLH    &kp AMPS    &kp LBRC    &kp RBRC    &kp LT              &kp TILDE   &none       &none       &none       &none       &none
                                         &trans      &trans      &trans              &trans      &trans      &trans
             >;
         };
@@ -221,20 +189,20 @@
         num_ru_layer {
             display-name = "num.ru";
             bindings = <
-    &trans      &trans      &trans      &trans      &trans      &trans              &ru_en GRAVE &trans     &trans      &trans      &lbkt_ru    &rbkt_ru
-    &trans      &trans      &trans      &trans      &trans      &trans              &comma_ru   &trans      &trans      &trans      &dot_ru     &sqt_ru
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &slash_ru   &bslh_ru
-                                        &trans      &trans      &trans              &trans      &trans      &trans
+    &trans       &trans       &trans       &trans       &trans       &trans               &ru_en GRAVE &trans       &trans       &trans       &ru_en LBKT  &ru_en RBKT
+    &trans       &trans       &trans       &trans       &trans       &trans               &kp LS(N7)   &trans       &trans       &trans       &trans       &ru_en SQT
+    &trans       &trans       &trans       &trans       &trans       &trans               &trans       &trans       &trans       &trans       &slash_ru    &trans
+                                           &trans       &trans       &trans               &trans       &trans       &trans
             >;
         };
 
         sym_ru_layer {
             display-name = "sym.ru";
             bindings = <
-    &trans      &ru_en CARET &ru_en AMPS &ru_en LT  &ru_en GT   &trans              &trans      &trans      &trans      &trans      &trans      &trans
-    &kp LS(N7)  &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
-    &semi_ru    &ru_en TILDE &ru_en DLLR &ru_en HASH &trans     &ru_en AT           &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans              &trans      &trans      &trans
+    &trans       &kp PIPE2    &kp LS(N4)   &kp LS(N6)   &trans       &ru_en GT            &ru_en DLLR  &ru_en HASH  &trans       &trans       &ru_en AT    &ru_en CARET
+    &kp LS(N7)   &trans       &trans       &trans       &trans       &kp LS(N2)           &trans       &trans       &trans       &trans       &trans       &trans
+    &trans       &kp LS(BSLH) &ru_en AMPS  &ru_en LBRC  &ru_en RBRC  &ru_en LT            &ru_en TILDE &trans       &trans       &trans       &trans       &trans
+                                           &trans       &trans       &trans               &trans       &trans       &trans
             >;
         };
 

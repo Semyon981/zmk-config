@@ -126,7 +126,7 @@
          * (з и х) — биграммы «зх» в русском нет. Только на RU: на базе
          * там P и [. */
         ru_hardsign {
-            key-positions = <10 11>;
+            key-positions = <33 34>;
             bindings = <&kp RBKT>;
             layers = <RU>;
             timeout-ms = <50>;
@@ -169,7 +169,7 @@
         num_layer {
             display-name = "num";
             bindings = <
-    &none       &none       &none       &none       &none       &none               &kp GRAVE   &kp N7      &kp N8      &kp N9      &kp LBKT    &kp RBKT
+    &trans      &none       &none       &none       &none       &none               &kp GRAVE   &kp N7      &kp N8      &kp N9      &kp LBKT    &kp RBKT
     &trans      &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &none               &kp QMARK   &kp N4      &kp N5      &kp N6      &kp EXCL    &kp SQT
     &trans      &none       &none       &none       &none       &none               &kp N0      &kp N1      &kp N2      &kp N3      &kp FSLH    &kp BSLH
                                         &trans      &trans      &trans              &trans      &trans      &trans

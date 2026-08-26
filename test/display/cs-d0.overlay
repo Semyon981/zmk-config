@@ -1,0 +1,16 @@
+/*
+ * CS на пине D0 (P0.08) вместо D1 (P0.06): `make display-test CSPIN=d0`.
+ *
+ * Так разведён разъём экрана на плате клавиатуры — проверено пинвокером:
+ * контакт CS разъёма отзывается на частоту пина D0, а не D1. Шилд
+ * nice_view_adapter ставит `cs-gpios = <&pro_micro 1>` (P0.06), и с ним
+ * панель в клавиатуре кадр не защёлкивает, хотя SCK и MOSI доходят.
+ *
+ * P0.08 свободен: uart0 (его RX сидит на этом пине) в сборке disabled.
+ */
+
+#include <zephyr/dt-bindings/gpio/gpio.h>
+
+&spi0 {
+    cs-gpios = <&pro_micro 0 GPIO_ACTIVE_HIGH>;
+};

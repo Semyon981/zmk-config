@@ -1,0 +1,10 @@
+/*
+ * Вариант CS, активного низким: `make display-test CS=low`.
+ * У Sharp-панелей CS активен высоким, но на клоне может стоять инвертор.
+ */
+
+#include <zephyr/dt-bindings/gpio/gpio.h>
+
+&spi0 {
+    cs-gpios = <&pro_micro 1 GPIO_ACTIVE_LOW>;
+};

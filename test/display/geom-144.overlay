@@ -1,0 +1,6 @@
+/* Панель 144x168 (LS013B7DH05): `make display-test RAW=1 GEOM=144`. */
+
+&nice_view {
+    width = <144>;
+    height = <168>;
+};

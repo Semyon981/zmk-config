@@ -1,0 +1,5 @@
+/* Половина от рабочих 250 кГц: `make display-test RAW=1 FREQ=125`. */
+
+&nice_view {
+    spi-max-frequency = <125000>;
+};

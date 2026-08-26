@@ -1,0 +1,85 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+#define EN    0
+#define NAV   1
+#define NUM   2
+#define MOD_L 3
+#define MOD_R 4
+
+/*
+ *  0  1  2  3  4  5  |  6  7  8  9 10 11
+ * 12 13 14 15 16 17  | 18 19 20 21 22 23
+ * 24 25 26 27 28 29  | 30 31 32 33 34 35
+ *          36 37 38  | 39 40 41
+ */
+
+
+/ {
+    behaviors {
+        skq: sticky_key_quick {
+            compatible = "zmk,behavior-sticky-key";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <1000>;
+            quick-release;
+            ignore-modifiers;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            display-name = "main";
+            bindings = <
+    &kp TAB     &kp Q       &kp W       &kp E       &kp R       &kp T               &kp Y       &kp U       &kp I       &kp O       &kp P       &kp LBKT
+    &kp ESC     &kp A       &kp S       &kp D       &kp F       &kp G               &kp H       &kp J       &kp K       &kp L       &kp SEMI    &kp SQT
+    &skq LSHFT  &kp Z       &kp X       &kp C       &kp V       &kp B               &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp RBKT
+                                        &mo MOD_L   &mo NAV     &kp SPACE           &kp RET     &kp BSPC    &mo MOD_R
+            >;
+        };
+
+        nav_layer {
+            display-name = "nav";
+            bindings = <
+    &trans      &none       &none       &none       &none       &none               &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &none       &none
+    &trans      &kp LALT    &kp LSHFT   &kp LGUI    &kp LCTRL   &mo NUM             &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &kp DEL     &none
+    &trans      &none       &none       &none       &none       &none               &none       &none       &none       &none       &none       &none
+                                        &trans      &trans      &trans          &kp LG(SPACE)   &kp LA(SPACE)   &trans
+            >;
+        };
+
+        num_layer {
+            display-name = "num";
+            bindings = <
+    &trans      &none       &kp TILDE   &kp PIPE    &none       &none               &kp EQUAL   &kp N7      &kp N8      &kp N9      &kp PLUS    &none
+    &trans      &kp LALT    &kp LSHFT   &kp LGUI    &kp LCTRL   &trans              &kp N0      &kp N4      &kp N5      &kp N6      &kp MINUS   &none
+    &trans      &none       &kp GRAVE   &kp BSLH    &none       &none               &kp UNDER   &kp N1      &kp N2      &kp N3      &kp DOT     &none
+                                        &trans      &trans      &trans              &kp RET     &kp BSPC    &trans
+            >;
+        };
+
+        mod_l_layer {
+            display-name = "mod.l";
+            bindings = <
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+    &trans      &kp LALT    &kp LSHFT   &kp LGUI    &kp LCTRL   &trans              &trans      &trans      &trans      &trans      &trans      &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+                                        &trans      &trans      &trans              &trans      &trans      &trans
+            >;
+        };
+
+        mod_r_layer {
+            display-name = "mod.r";
+            bindings = <
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &kp LCTRL   &kp LGUI    &kp LSHFT   &kp LALT    &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
+                                        &trans      &trans      &trans              &trans      &trans      &trans
+            >;
+        };
+
+    };
+
+};

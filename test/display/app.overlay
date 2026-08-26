@@ -1,0 +1,59 @@
+/*
+ * Разводка панели на макетке — та же, что делает шилд nice_view_adapter на
+ * разъёме Corne: SCK P0.20, MOSI P0.17, CS на pro_micro 1 (D1, P0.06).
+ * CS у Sharp-панелей активен высоким. Питание VCC панели — с пина VCC
+ * платы, то есть через ключ P0.13, его поднимает ext_power_on() в src/board.c.
+ *
+ * MISO не заведён: панель ничего не отдаёт, провода на макетке нет. Без
+ * NRF_PSEL(SPIM_MISO, ...) пин P0.25 остаётся свободным.
+ */
+
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
+
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,
+                <NRF_PSEL(SPIM_MOSI, 0, 17)>;
+        };
+    };
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,
+                <NRF_PSEL(SPIM_MOSI, 0, 17)>;
+            low-power-enable;
+        };
+    };
+};
+
+/* i2c0 сидит на тех же пинах — гасим, иначе конфликт pinctrl. */
+&i2c0 {
+    status = "disabled";
+};
+
+&spi0 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+    cs-gpios = <&pro_micro 1 GPIO_ACTIVE_HIGH>;
+
+    nice_view: ls0xx@0 {
+        compatible = "sharp,ls0xx";
+        reg = <0>;
+        /* 250 кГц — рабочее значение на этом клоне, 1 МГц бьёт кадр. */
+        spi-max-frequency = <250000>;
+        width = <160>;
+        height = <68>;
+        serial-vcom-inversion;
+        serial-vcom-interval = <33>;
+    };
+};
+
+/ {
+    chosen {
+        zephyr,display = &nice_view;
+    };
+};

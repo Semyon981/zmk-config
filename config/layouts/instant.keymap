@@ -1,6 +1,8 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+#include "common.h"
+
 #define EN    0
 #define NAV   1
 #define NUM   2
@@ -33,50 +35,50 @@
         default_layer {
             display-name = "main";
             bindings = <
-    &kp TAB     &kp Q       &kp W       &kp E       &kp R       &kp T               &kp Y       &kp U       &kp I       &kp O       &kp P       &kp LBKT
-    &kp ESC     &kp A       &kp S       &kp D       &kp F       &kp G               &kp H       &kp J       &kp K       &kp L       &kp SEMI    &kp SQT
-    &skq LSHFT  &kp Z       &kp X       &kp C       &kp V       &kp B               &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp RBKT
-                                        &mo MOD_L   &mo NAV     &kp SPACE           &kp RET     &kp BSPC    &mo MOD_R
+    &kp TAB       &kp Q       &kp W       &kp E        &kp R       &kp T               &kp Y       &kp U       &kp I        &kp O       &kp P       &kp LBKT
+    &kp ESC       &kp A       &kp S       &kp D        &kp F       &kp G               &kp H       &kp J       &kp K        &kp L       &kp SEMI    &kp SQT
+    &skq LSHFT    &kp Z       &kp X       &kp C        &kp V       &kp B               &kp N       &kp M       &kp COMMA    &kp DOT     &kp FSLH    &kp RBKT
+                                          &mo MOD_L    &mo NAV     &kp SPACE           &kp RET     &kp BSPC    &mo MOD_R
             >;
         };
 
         nav_layer {
             display-name = "nav";
             bindings = <
-    &trans      &none       &none       &none       &none       &none               &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &none       &none
-    &trans      &kp LALT    &kp LSHFT   &kp LGUI    &kp LCTRL   &mo NUM             &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &kp DEL     &none
-    &trans      &none       &none       &none       &none       &none               &none       &none       &none       &none       &none       &none
-                                        &trans      &trans      &trans          &kp LG(SPACE)   &kp LA(SPACE)   &trans
+    &trans      &none            &none           &none             &none            &none               &kp HOME         &kp PG_DN          &kp PG_UP    &kp END      &none       &none
+    &trans      &kp PINKY_MOD    &kp RING_MOD    &kp MIDDLE_MOD    &kp INDEX_MOD    &mo NUM             &kp LEFT         &kp DOWN           &kp UP       &kp RIGHT    &kp DEL     &none
+    &trans      &none            &none           &none             &none            &none               &none            &none              &none        &none        &none       &none
+                                                 &trans            &trans           &trans              &kp LAUNCHER     &kp LANG_SWITCH    &trans
             >;
         };
 
         num_layer {
             display-name = "num";
             bindings = <
-    &trans      &none       &kp TILDE   &kp PIPE    &none       &none               &kp EQUAL   &kp N7      &kp N8      &kp N9      &kp PLUS    &none
-    &trans      &kp LALT    &kp LSHFT   &kp LGUI    &kp LCTRL   &trans              &kp N0      &kp N4      &kp N5      &kp N6      &kp MINUS   &none
-    &trans      &none       &kp GRAVE   &kp BSLH    &none       &none               &kp UNDER   &kp N1      &kp N2      &kp N3      &kp DOT     &none
-                                        &trans      &trans      &trans              &kp RET     &kp BSPC    &trans
+    &trans      &none            &kp TILDE       &kp PIPE          &none            &none               &kp EQUAL    &kp N7      &kp N8      &kp N9      &kp PLUS     &none
+    &trans      &kp PINKY_MOD    &kp RING_MOD    &kp MIDDLE_MOD    &kp INDEX_MOD    &trans              &kp N0       &kp N4      &kp N5      &kp N6      &kp MINUS    &none
+    &trans      &none            &kp GRAVE       &kp BSLH          &none            &none               &kp UNDER    &kp N1      &kp N2      &kp N3      &kp DOT      &none
+                                                 &trans            &trans           &trans              &kp RET      &kp BSPC    &trans
             >;
         };
 
         mod_l_layer {
             display-name = "mod.l";
             bindings = <
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
-    &trans      &kp LALT    &kp LSHFT   &kp LGUI    &kp LCTRL   &trans              &trans      &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans              &trans      &trans      &trans
+    &trans      &trans           &trans          &trans            &trans           &trans              &trans      &trans      &trans      &trans      &trans      &trans
+    &trans      &kp PINKY_MOD    &kp RING_MOD    &kp MIDDLE_MOD    &kp INDEX_MOD    &trans              &trans      &trans      &trans      &trans      &trans      &trans
+    &trans      &trans           &trans          &trans            &trans           &trans              &trans      &trans      &trans      &trans      &trans      &trans
+                                                 &trans            &trans           &trans              &trans      &trans      &trans
             >;
         };
 
         mod_r_layer {
             display-name = "mod.r";
             bindings = <
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &kp LCTRL   &kp LGUI    &kp LSHFT   &kp LALT    &trans
-    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans      &trans      &trans      &trans      &trans
-                                        &trans      &trans      &trans              &trans      &trans      &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans           &trans            &trans          &trans           &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &kp INDEX_MOD    &kp MIDDLE_MOD    &kp RING_MOD    &kp PINKY_MOD    &trans
+    &trans      &trans      &trans      &trans      &trans      &trans              &trans      &trans           &trans            &trans          &trans           &trans
+                                        &trans      &trans      &trans              &trans      &trans           &trans
             >;
         };
 

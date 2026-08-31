@@ -62,7 +62,9 @@ DOCKER_RUN = docker run --rm \
 	-w /workspace
 
 # Локальные модули лежат в config/, потому что только он монтируется в контейнер.
-MODULES := /workspace/config/modules/ru-layer-sync
+# Разделитель — ';' (список CMake), от шелла его защищают одинарные кавычки
+# вокруг $(MODULES) в zmk-build.
+MODULES := /workspace/config/modules/ru-layer-sync;/workspace/config/modules/lang-screen
 
 # KEYMAP_FILE перебивает автопоиск `<шилд>.keymap` в ZMK_CONFIG, EXTRA_CONF_FILE
 # докладывается поверх corne.conf и corne_<side>.conf.

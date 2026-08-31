@@ -1,0 +1,55 @@
+# Свой status screen для nice!view с крупным индикатором языка.
+
+# Выключен по умолчанию, включает раскладка (config/layouts/*.conf). Opt-in,
+# потому что язык определяется по индексу слоя: в instant слой 1 — это NAV,
+# и индикатор врал бы при каждом удержании большого пальца.
+#
+# Занимает тот же символ zmk_display_status_screen(), что и виджет шилда,
+# поэтому вместе с ним требует CONFIG_NICE_VIEW_WIDGET_STATUS=n — иначе два
+# сильных определения и ошибка линковки. В ZMK этот символ объявлен weak
+# (app/src/display/main.c), так что форк не нужен, хватает модуля.
+config ZMK_LANG_SCREEN
+    bool "nice!view status screen with a large language indicator"
+    depends on ZMK_DISPLAY && ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+    select LV_USE_CANVAS
+    select LV_FONT_MONTSERRAT_14
+    select LV_FONT_MONTSERRAT_16
+    select LV_FONT_MONTSERRAT_42
+    help
+      Экран из трёх квадратов 68x68 (как у виджета nice!view): статус,
+      крупный индикатор языка и имя активного слоя. Язык берётся из
+      состояния слоя, а не из индикатора хоста напрямую, — так экран
+      показывает то, что печатает сама клавиатура, и остаётся верным
+      при ручном &tog.
+
+# WPM тут был и убран ради батареи: zmk/app/src/wpm.c крутит k_timer раз в
+# секунду вечно, а при печати значение меняется почти каждую секунду и с
+# LV_Z_FULL_REFRESH=y уносит в панель полный кадр 160x68 (~50 мс на 250 кГц).
+# Расход ложился целиком на центральную — ZMK_WPM собирался только на ней, —
+# и заметно перекашивал разряд половинок. Вместе с графиком ушёл и
+# LV_FONT_UNSCII_8: он был нужен только под число WPM.
+
+if ZMK_LANG_SCREEN
+
+config ZMK_LANG_SCREEN_LAYER
+    int "Layer index that stands for the alternative language"
+    default 1
+    help
+      Индекс слоя в keymap, а не имя, — тот же, что у ru-layer-sync
+      (ZMK_RU_LAYER_SYNC_LAYER). Слой RU объявлен вторым, отсюда 1.
+      Пока он активен, экран показывает ZMK_LANG_SCREEN_LABEL_ALT.
+
+config ZMK_LANG_SCREEN_LABEL_BASE
+    string "Label for the base language"
+    default "EN"
+    help
+      Две заглавные буквы Montserrat 42 — предел ширины 68 px.
+
+config ZMK_LANG_SCREEN_LABEL_ALT
+    string "Label for the alternative language"
+    default "RU"
+    help
+      Рисуется инверсией (белым по чёрному), чтобы язык читался боковым
+      зрением, не вчитываясь в буквы.
+
+endif # ZMK_LANG_SCREEN

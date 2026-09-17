@@ -18,8 +18,8 @@
  * Сам слой RU переключается не отсюда, а модулем ru-layer-sync по
  * HID-индикатору хоста; прошивка только шлёт сочетание.
  */
-#define LANG_SWITCH LG(SPACE)
-#define LAUNCHER    LG(A)
+#define LANG_SWITCH RALT
+#define LAUNCHER    LG(SPACE)
 
 /*
  * Порядок модификаторов ASGC, заданный пальцем, а не рукой: от мизинца

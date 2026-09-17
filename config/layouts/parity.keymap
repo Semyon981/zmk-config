@@ -169,7 +169,7 @@
             bindings = <
     &trans      &caps_word       &kp LC(LS(TAB))    &kp LC(TAB)       &kp LG(TAB)      &kp LG(LBKT)        &kp HOME        &kp PG_DN    &kp PG_UP     &kp END         &kp INS         &kp PSCRN
     &trans      &kp PINKY_MOD    &kp RING_MOD       &kp MIDDLE_MOD    &kp INDEX_MOD    &kp LC(A)           &kp LEFT        &kp DOWN     &kp UP        &kp RIGHT       &kp DEL         &kp LG(RBKT)
-    &trans      &kp LC(Z)        &kp LC(X)          &kp LC(C)         &kp LC(V)        &kp LC(LS(Z))       &kp C_PREV      &kp C_PP     &kp C_NEXT    &kp C_VOL_DN    &kp C_VOL_UP    &kp C_MUTE
+    &trans      &kp LC(Z)        &kp LS(DEL)        &kp LC(INS)       &kp LS(INS)      &kp LC(LS(Z))       &kp C_PREV      &kp C_PP     &kp C_NEXT    &kp C_VOL_DN    &kp C_VOL_UP    &kp C_MUTE
                                                     &trans            &trans           &trans              &kp LAUNCHER    &lang        &trans
             >;
         };
